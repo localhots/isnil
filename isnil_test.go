@@ -31,6 +31,21 @@ func TestIsNil(t *testing.T) {
 	}
 }
 
+func BenchmarkEqNilBasic(b *testing.B) {
+	var v *int
+	for i := 0; i < b.N; i++ {
+		_ = (v != nil)
+	}
+}
+
+func BenchmarkEqNilInterface(b *testing.B) {
+	var v interface{}
+	v = (*foo)(nil)
+	for i := 0; i < b.N; i++ {
+		_ = (v != nil)
+	}
+}
+
 func BenchmarkIsNilBasic(b *testing.B) {
 	var v *int
 	for i := 0; i < b.N; i++ {
